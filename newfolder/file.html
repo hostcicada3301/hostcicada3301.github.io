@@ -1,19 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>page2</title>
-    <link rel="stylesheet" href="newstyle.css">
-</head>
-<body>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     
-    <main>
-        <h2>Hello There!</h2>
-    </main>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="newstyle.css">
+
+    <title >Hello, world!</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  </head>
+  <body>
+    <h1 class="text-center text-light">Hello, world!</h1>
 
 
+    <hr>
+    
+    <form id="form" target="_self" onsubmit="return postToGoogle();" action="" autocomplete="off">
+        <div class="form-group">
+          <label class="text-primary">name</label>
+          <input type="text" class="form-control" id="nameField" name="entry.1154759775" placeholder="name">
+        </div>
+        <d iv class="form-group">
+          <label for="exampleFormControlTextarea1" class="text-primary">Your text</label>
+          <textarea class="form-control" id="textField" name="entry.610044529"></textarea>
+        </div>
 
-</body>
+
+        <div class="p-3 text-center" id="send">
+            <button type="submit">Submit</button>
+        </div>
+
+
+    </form>
+
+      
+    <div class="text-center text-danger" id="success-msg">
+        <h3>I got you</h3>
+    </div>
+
+    <script>
+        function postToGoogle() {
+                        var field1 = $("#nameField").val();
+                        var field2 = $("#textField").val();
+                    
+                         
+                        if(field1 == ""){
+                            alert('Please Fill Your email');
+                            document.getElementById("nameField").focus();
+                            return false;
+                        }
+                        if(field2 == ""){
+                            alert('Please Fill Your text');
+                            document.getElementById("textField").focus();
+                            return false;
+                        }
+                        
+        
+        
+                        
+            
+                        $.ajax({
+
+                           
+                            url: "https://docs.google.com/forms/d/e/1FAIpQLSf5IHbujsWnw9eQke13VG80pVtf8XHuIePWXZVIvIIrW_3Gcw/formResponse?",
+                            data: {"entry.1154759775": field1, "entry.610044529": field2},
+                            type: "POST",
+                            dataType: "xml",
+                            success: function(d)
+                            {
+                            },
+                            error: function(x, y, z)
+                                {
+        
+                                    $('#success-msg').show();
+                                    $('#form').hide();
+                                    
+                                }
+                        });
+                        return false;
+                    }
+        </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
 </html>
